@@ -1,0 +1,349 @@
+Backup failed for Site library. Database or site_config.json may be corrupted
+Traceback with variables (most recent call last):
+  File "apps/frappe/frappe/database/database.py", line 236, in sql
+    self._cursor.execute(query, values)
+      self = <frappe.database.mariadb.database.MariaDBDatabase object at 0x7fea5e567f50>
+      query = "select *\n\t\t\tfrom `tabCustom DocPerm`\n\t\t\twhere `tabCustom DocPerm`.`parent` = 'System Settings'\n\t\t\t\n\t\t\t order by `tabCustom DocPerm`.`creation` ASC"
+      values = None
+      as_dict = True
+      as_list = 0
+      debug = False
+      ignore_ddl = False
+      auto_commit = 0
+      update = {'doctype': 'Custom DocPerm'}
+      explain = False
+      run = True
+      pluck = False
+      as_iterator = False
+      trace_id = None
+  File "env/lib/python3.11/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+      self = <pymysql.cursors.Cursor object at 0x7fea5e58e990>
+      query = "select *\n\t\t\tfrom `tabCustom DocPerm`\n\t\t\twhere `tabCustom DocPerm`.`parent` = 'System Settings'\n\t\t\t\n\t\t\t order by `tabCustom DocPerm`.`creation` ASC"
+      args = None
+  File "env/lib/python3.11/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+      self = <pymysql.cursors.Cursor object at 0x7fea5e58e990>
+      q = "select *\n\t\t\tfrom `tabCustom DocPerm`\n\t\t\twhere `tabCustom DocPerm`.`parent` = 'System Settings'\n\t\t\t\n\t\t\t order by `tabCustom DocPerm`.`creation` ASC"
+      conn = <pymysql.connections.Connection object at 0x7fea5e58f050>
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+      self = <pymysql.connections.Connection object at 0x7fea5e58f050>
+      sql = b"select *\n\t\t\tfrom `tabCustom DocPerm`\n\t\t\twhere `tabCustom DocPerm`.`parent` = 'System Settings'\n\t\t\t\n\t\t\t order by `tabCustom DocPerm`.`creation` ASC"
+      unbuffered = False
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+      self = <pymysql.connections.Connection object at 0x7fea5e58f050>
+      unbuffered = False
+      result = <pymysql.connections.MySQLResult object at 0x7fea5de7a3d0>
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+      self = <pymysql.connections.MySQLResult object at 0x7fea5de7a3d0>
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+      self = <pymysql.connections.Connection object at 0x7fea5e58f050>
+      packet_type = <class 'pymysql.protocol.MysqlPacket'>
+      buff = bytearray(b'\xff\xbd\x04#40001Deadlock found when trying to get lock; try restarting transaction')
+      packet_header = b'K\x00\x00\x01'
+      btrl = 75
+      btrh = 0
+      packet_number = 1
+      bytes_to_read = 75
+      recv_data = b'\xff\xbd\x04#40001Deadlock found when trying to get lock; try restarting transaction'
+      packet = <pymysql.protocol.MysqlPacket object at 0x7fea5de65990>
+  File "env/lib/python3.11/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+      self = <pymysql.protocol.MysqlPacket object at 0x7fea5de65990>
+      errno = 1213
+  File "env/lib/python3.11/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+      data = b'\xff\xbd\x04#40001Deadlock found when trying to get lock; try restarting transaction'
+      errno = 1213
+      errval = 'Deadlock found when trying to get lock; try restarting transaction'
+      errorclass = <class 'pymysql.err.OperationalError'>
+pymysql.err.OperationalError: (1213, 'Deadlock found when trying to get lock; try restarting transaction')
+File ./library/private/backups/20240806_141614-library-site_config_backup.json is recent
+File ./library/private/backups/20240806_141528-library-private-files.tar is recent
+File ./library/private/backups/20240806_141528-library-site_config_backup.json is recent
+File ./library/private/backups/20240806_141528-library-database.sql.gz is recent
+File ./library/private/backups/20240806_141614-library-private-files.tar is recent
+File ./library/private/backups/20240806_141614-library-files.tar is recent
+File ./library/private/backups/20240806_141528-library-files.tar is recent
+File ./library/private/backups/20240806_141614-library-database.sql.gz is recent
+Backup failed for Site library.com. Database or site_config.json may be corrupted
+Traceback with variables (most recent call last):
+  File "apps/frappe/frappe/commands/site.py", line 829, in backup
+    odb = scheduled_backup(
+      context = {'sites': ['library', 'library.com'], 'force': False, 'verbose': True, 'profile': False}
+      with_files = False
+      backup_path = None
+      backup_path_db = None
+      backup_path_files = None
+      backup_path_private_files = None
+      backup_path_conf = None
+      ignore_backup_conf = False
+      verbose = True
+      compress = False
+      include = ''
+      exclude = ''
+      old_backup_metadata = False
+      scheduled_backup = <function scheduled_backup at 0x7fea5f0eb1a0>
+      exit_code = 1
+      rollback_callback = None
+      site = 'library.com'
+  File "apps/frappe/frappe/utils/backups.py", line 577, in scheduled_backup
+    return new_backup(
+      older_than = 6
+      ignore_files = True
+      backup_path = None
+      backup_path_db = None
+      backup_path_files = None
+      backup_path_private_files = None
+      backup_path_conf = None
+      ignore_conf = False
+      include_doctypes = ''
+      exclude_doctypes = ''
+      compress = False
+      force = True
+      verbose = True
+      old_backup_metadata = False
+      rollback_callback = <frappe.utils.CallbackManager object at 0x7fea5e3ce230>
+  File "apps/frappe/frappe/utils/backups.py", line 635, in new_backup
+    odb.get_backup(older_than, ignore_files, force=force)
+      older_than = 6
+      ignore_files = True
+      backup_path = None
+      backup_path_db = None
+      backup_path_files = None
+      backup_path_private_files = None
+      backup_path_conf = None
+      ignore_conf = False
+      include_doctypes = ''
+      exclude_doctypes = ''
+      compress = False
+      force = True
+      verbose = True
+      old_backup_metadata = False
+      rollback_callback = <frappe.utils.CallbackManager object at 0x7fea5e3ce230>
+      odb = <frappe.utils.backups.BackupGenerator object at 0x7fea5e4acc90>
+  File "apps/frappe/frappe/utils/backups.py", line 188, in get_backup
+    self.set_backup_file_name()
+      self = <frappe.utils.backups.BackupGenerator object at 0x7fea5e4acc90>
+      older_than = 6
+      ignore_files = True
+      force = True
+      last_db = False
+      last_file = False
+      last_private_file = False
+      site_config_backup_path = False
+  File "apps/frappe/frappe/utils/backups.py", line 210, in set_backup_file_name
+    enc = "-enc" if frappe.get_system_settings("encrypt_backup") else ""
+      self = <frappe.utils.backups.BackupGenerator object at 0x7fea5e4acc90>
+      partial = ''
+      ext = 'tar'
+  File "apps/frappe/frappe/__init__.py", line 2438, in get_system_settings
+    local.system_settings = get_cached_doc("System Settings")
+      key = ********
+  File "apps/frappe/frappe/__init__.py", line 1253, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+      args = ('System Settings',)
+      kwargs = {}
+      key = ********
+      doc = None
+  File "apps/frappe/frappe/__init__.py", line 1379, in get_doc
+    doc = frappe.model.document.get_doc(*args, **kwargs)
+      args = ('System Settings',)
+      kwargs = {}
+      frappe = <module 'frappe' from 'apps/frappe/frappe/__init__.py'>
+  File "apps/frappe/frappe/model/document.py", line 87, in get_doc
+    return controller(*args, **kwargs)
+      args = ('System Settings',)
+      kwargs = {}
+      doctype = 'System Settings'
+      controller = <class 'frappe.core.doctype.system_settings.system_settings.SystemSettings'>
+  File "apps/frappe/frappe/model/document.py", line 128, in __init__
+    self.load_from_db()
+      self = <SystemSettings: System Settings>
+      args = ('System Settings',)
+      kwargs = {}
+      __class__ = <class 'frappe.model.document.Document'>
+  File "apps/frappe/frappe/model/document.py", line 153, in load_from_db
+    if not getattr(self, "_metaclass", False) and self.meta.issingle:
+      self = <SystemSettings: System Settings>
+      __class__ = <class 'frappe.model.document.Document'>
+  File "/usr/lib/python3.11/functools.py", line 1001, in __get__
+    val = self.func(instance)
+      self = <functools.cached_property object at 0x7fea5efa2d50>
+      instance = <SystemSettings: System Settings>
+      owner = <class 'frappe.core.doctype.system_settings.system_settings.SystemSettings'>
+      cache = {'doctype': 'System Settings', 'name': 'System Settings', 'flags': {'for_update': None, 'ignore_children': True}}
+      val = <exception while printing> Traceback (most recent call last):
+          File "env/lib/python3.11/site-packages/traceback_with_variables/core.py", line 222, in _to_cropped_str
+            raw = print_(obj)
+                  ^^^^^^^^^^^
+          File "apps/frappe/frappe/utils/__init__.py", line 346, in dict_printer
+            if key in v:
+               ^^^^^^^^
+        TypeError: argument of type 'object' is not iterable
+        
+  File "apps/frappe/frappe/model/base_document.py", line 151, in meta
+    return frappe.get_meta(self.doctype)
+      self = <SystemSettings: System Settings>
+  File "apps/frappe/frappe/__init__.py", line 1406, in get_meta
+    return frappe.model.meta.get_meta(doctype, cached=cached)
+      doctype = 'System Settings'
+      cached = True
+      frappe = <module 'frappe' from 'apps/frappe/frappe/__init__.py'>
+  File "apps/frappe/frappe/model/meta.py", line 64, in get_meta
+    meta = Meta(doctype)
+      doctype = 'System Settings'
+      cached = True
+      meta = None
+  File "apps/frappe/frappe/model/meta.py", line 118, in __init__
+    super().__init__("DocType", doctype)
+      self = <Meta: System Settings>
+      doctype = 'System Settings'
+      __class__ = <class 'frappe.model.meta.Meta'>
+  File "apps/frappe/frappe/model/document.py", line 128, in __init__
+    self.load_from_db()
+      self = <Meta: System Settings>
+      args = ('DocType', 'System Settings')
+      kwargs = {}
+      __class__ = <class 'frappe.model.document.Document'>
+  File "apps/frappe/frappe/model/meta.py", line 124, in load_from_db
+    super().load_from_db()
+      self = <Meta: System Settings>
+      __class__ = <class 'frappe.model.meta.Meta'>
+  File "apps/frappe/frappe/model/document.py", line 169, in load_from_db
+    d = frappe.db.get_value(
+      self = <Meta: System Settings>
+      get_value_kwargs = {'for_update': None, 'as_dict': True, 'order_by': None}
+      __class__ = <class 'frappe.model.document.Document'>
+  File "apps/frappe/frappe/database/database.py", line 524, in get_value
+    result = self.get_values(
+      self = <frappe.database.mariadb.database.MariaDBDatabase object at 0x7fea5de7a3d0>
+      doctype = 'DocType'
+      filters = 'System Settings'
+      fieldname = '*'
+      ignore = None
+      as_dict = True
+      debug = False
+      order_by = None
+      cache = False
+      for_update = None
+      run = True
+      pluck = False
+      distinct = False
+      skip_locked = False
+      wait = True
+  File "apps/frappe/frappe/database/database.py", line 653, in get_values
+    out = self.get_values_from_single(
+      self = <frappe.database.mariadb.database.MariaDBDatabase object at 0x7fea5de7a3d0>
+      doctype = 'DocType'
+      filters = 'System Settings'
+      fieldname = '*'
+      ignore = None
+      as_dict = True
+      debug = False
+      order_by = None
+      update = None
+      cache = False
+      for_update = None
+      run = True
+      pluck = False
+      distinct = False
+      limit = 1
+      skip_locked = False
+      wait = True
+      out = None
+      fields = '*'
+  File "apps/frappe/frappe/database/database.py", line 690, in get_values_from_single
+    values = self.get_singles_dict(doctype)
+      self = <frappe.database.mariadb.database.MariaDBDatabase object at 0x7fea5de7a3d0>
+      fields = '*'
+      filters = 'System Settings'
+      doctype = 'DocType'
+      as_dict = True
+      debug = False
+      update = None
+      run = True
+      pluck = False
+      distinct = False
+  File "apps/frappe/frappe/database/database.py", line 743, in get_singles_dict
+    ).run(debug=debug)
+      self = <frappe.database.mariadb.database.MariaDBDatabase object at 0x7fea5de7a3d0>
+      doctype = 'DocType'
+      debug = False
+      for_update = False
+      cast = False
+  File "apps/frappe/frappe/query_builder/utils.py", line 84, in execute_query
+    result = frappe.db.sql(query, params, *args, **kwargs)  # nosemgrep
+      query = 'SELECT `field`,`value` FROM `tabSingles` WHERE `doctype`=%(param1)s'
+      args = ()
+      kwargs = {'debug': False}
+      child_queries = []
+      params = {'param1': 'DocType'}
+      execute_child_queries = <function patch_query_execute.<locals>.execute_child_queries at 0x7fea5e562f20>
+      prepare_query = <function patch_query_execute.<locals>.prepare_query at 0x7fea5e562fc0>
+  File "apps/frappe/frappe/database/database.py", line 236, in sql
+    self._cursor.execute(query, values)
+      self = <frappe.database.mariadb.database.MariaDBDatabase object at 0x7fea5de7a3d0>
+      query = 'SELECT `field`,`value` FROM `tabSingles` WHERE `doctype`=%(param1)s'
+      values = {'param1': 'DocType'}
+      as_dict = 0
+      as_list = 0
+      debug = False
+      ignore_ddl = 0
+      auto_commit = 0
+      update = None
+      explain = False
+      run = True
+      pluck = False
+      as_iterator = False
+      trace_id = None
+  File "env/lib/python3.11/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+      self = <pymysql.cursors.Cursor object at 0x7fea5e3f5bd0>
+      query = "SELECT `field`,`value` FROM `tabSingles` WHERE `doctype`='DocType'"
+      args = {'param1': 'DocType'}
+  File "env/lib/python3.11/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+      self = <pymysql.cursors.Cursor object at 0x7fea5e3f5bd0>
+      q = "SELECT `field`,`value` FROM `tabSingles` WHERE `doctype`='DocType'"
+      conn = <pymysql.connections.Connection object at 0x7fea5e3f59d0>
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+      self = <pymysql.connections.Connection object at 0x7fea5e3f59d0>
+      sql = b"SELECT `field`,`value` FROM `tabSingles` WHERE `doctype`='DocType'"
+      unbuffered = False
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+      self = <pymysql.connections.Connection object at 0x7fea5e3f59d0>
+      unbuffered = False
+      result = <pymysql.connections.MySQLResult object at 0x7fea5e3d8d10>
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+      self = <pymysql.connections.MySQLResult object at 0x7fea5e3d8d10>
+  File "env/lib/python3.11/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+      self = <pymysql.connections.Connection object at 0x7fea5e3f59d0>
+      packet_type = <class 'pymysql.protocol.MysqlPacket'>
+      buff = bytearray(b"\xffz\x04#42S02Table \'_ac7c12bdd8365ca2.tabSingles\' doesn\'t exist")
+      packet_header = b';\x00\x00\x01'
+      btrl = 59
+      btrh = 0
+      packet_number = 1
+      bytes_to_read = 59
+      recv_data = b"\xffz\x04#42S02Table '_ac7c12bdd8365ca2.tabSingles' doesn't exist"
+      packet = <pymysql.protocol.MysqlPacket object at 0x7fea5df11ae0>
+  File "env/lib/python3.11/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+      self = <pymysql.protocol.MysqlPacket object at 0x7fea5df11ae0>
+      errno = 1146
+  File "env/lib/python3.11/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+      data = b"\xffz\x04#42S02Table '_ac7c12bdd8365ca2.tabSingles' doesn't exist"
+      errno = 1146
+      errval = "Table '_ac7c12bdd8365ca2.tabSingles' doesn't exist"
+      errorclass = <class 'pymysql.err.ProgrammingError'>
+pymysql.err.ProgrammingError: (1146, "Table '_ac7c12bdd8365ca2.tabSingles' doesn't exist")
